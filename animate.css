@@ -72,3 +72,46 @@
     opacity: 1;
   }
 }
+
+.scale-size {
+  -webkit-animation: scale-size 1s ease-in-out infinite both;
+  animation: scale-size 1s ease-in-out infinite both;
+}
+
+@-webkit-keyframes scale-size {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  30% {
+    -webkit-transform: scale(0.7);
+    transform: scale(0.7);
+  }
+  60% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+@keyframes scale-size {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  30% {
+    -webkit-transform: scale(0.7);
+    transform: scale(0.7);
+  }
+  60% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}

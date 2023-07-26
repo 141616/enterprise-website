@@ -69,3 +69,16 @@ header .banner-container p {
 .culture-section-content {
   background: rgba(0, 0, 0, 0.7);
 }
+
+/* 团队介绍 */
+.team-section-header {
+  background: url(./assets/team.png) no-repeat;
+  background-size: 60% auto;
+  background-position: 80% 50%;
+  padding-top: 8vw;
+}
+@media (max-width: 768px) {
+  .team-section-header {
+    background-position: center center;
+  }
+}

@@ -82,3 +82,35 @@ header .banner-container p {
     background-position: center center;
   }
 }
+
+/* 新闻动态 */
+.news-section-header {
+  background: url(./assets/news.png) no-repeat;
+  background-size: 60% auto;
+  background-position: 80% 50%;
+  padding-top: 8vw;
+}
+@media (max-width: 768px) {
+  .news-section-header {
+    background-position: center center;
+  }
+}
+.news-section {
+  background: #252429;
+}
+
+.with-2-col {
+  white-space: pre-wrap;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.with-4-col {
+  white-space: pre-wrap;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+}

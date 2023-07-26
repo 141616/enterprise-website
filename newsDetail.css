@@ -1,0 +1,12 @@
+/* 新闻动态 */
+.news-detail-section-header {
+  background: url(./assets/news-detail.png) no-repeat;
+  background-size: 50% auto;
+  background-position: 50% 50%;
+  padding-top: 8vw;
+}
+@media (max-width: 768px) {
+  .news-detail-section-header {
+    background-size: 80% auto;
+  }
+}

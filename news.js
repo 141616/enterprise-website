@@ -58,8 +58,11 @@ function fetchNews() {
         !isObserve && addLoadMoreObserver();
 
         data.forEach((item) => {
-          const newsItem = document.createElement("div");
-          newsItem.className = "news-item flex-1 w-full px-2 lg:px-3 xl:px-4";
+          const newsItem = document.createElement("a");
+          newsItem.className =
+            "news-item block flex-1 w-full px-2 lg:px-3 xl:px-4";
+          newsItem.href = "/newsDetail?id=" + item.id;
+          newsItem.target = "_blank";
 
           const newImage = document.createElement("img");
           newImage.className = "news-image";
@@ -83,7 +86,6 @@ function fetchNews() {
         });
       }
 
-      console.log(total, data);
       if (isLoadedAll()) {
         showLoadAll();
       }

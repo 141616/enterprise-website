@@ -76,6 +76,11 @@ header .banner-container p {
 }
 .service-img {
   opacity: 0;
+  cursor: pointer;
+  transition: all 0.3s linear;
+}
+.service-img:hover {
+  transform: scale(1.05);
 }
 
 /* 企业文化 */

@@ -6,12 +6,24 @@ header .banner-container h3 {
 }
 
 header .banner-container p {
-  font-size: clamp(16px, 1.8vw, 36px);
+  font-size: clamp(14px, 1.8vw, 36px);
 }
 
 .banner-container {
   aspect-ratio: 1920 / 800;
   width: 100%;
+}
+
+@media (max-width: 767px) {
+  .banner-container {
+    aspect-ratio: 768 / 540;
+    width: 100%;
+  }
+  .banner-container img {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+  }
 }
 
 .progress-circle {

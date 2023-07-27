@@ -19,7 +19,7 @@ function openDrawer() {
   document.body.style.overflow = "hidden";
 
   const drawerContentEle = document.getElementById("drawer-content");
-  drawerContentEle.classList.add("slide-in-right");
+  drawerContentEle.classList.add("slide-in-right-3");
   const drawerEle = document.getElementById("drawer");
   drawerEle.classList.remove("hidden");
 }
@@ -30,5 +30,5 @@ function closeDrawer() {
   const drawerEle = document.getElementById("drawer");
   drawerEle.classList.add("hidden");
   const drawerContentEle = document.getElementById("drawer-content");
-  drawerContentEle.classList.remove("slide-in-right");
+  drawerContentEle.classList.remove("slide-in-right-3");
 }

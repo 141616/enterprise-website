@@ -24,6 +24,17 @@
           ele.classList.add("fade-in");
         }
       }
+
+      function handleTeamImageLoaded(ele) {
+        if (!ele) {
+          return;
+        }
+        ele.setAttribute("data-load", "true");
+        const isIntoView = ele.getAttribute("data-into-view");
+        if (isIntoView === "true") {
+          ele.parentNode.classList.add("fade-in");
+        }
+      }
     </script>
   </head>
   <body>
@@ -50,7 +61,7 @@
           <div class="hidden md:flex items-center">
             <a href="/" class="mx-10">
               <div class="text-white text-sm font-normal">首页</div>
-              <div class="w-full h-0.5 mt-2"></div>
+              <div class="w-full h-0.5 bg-orange-600 mt-2"></div>
             </a>
             <a href="/news" target="_blank" class="mx-10">
               <div class="text-white text-sm font-normal">新闻列表页</div>
@@ -58,7 +69,7 @@
             </a>
             <a href="/about" target="_blank" class="mx-10">
               <div class="text-white text-sm font-normal">关于我们</div>
-              <div class="w-full h-0.5 bg-orange-600 mt-2"></div>
+              <div class="w-full h-0.5 mt-2"></div>
             </a>
           </div>
 
@@ -335,7 +346,7 @@
             <div class="flex items-end justify-end mb-[3.1vw]">
               <div class="w-[21vw] h-[21vw] mr-[3.1vw] bg-[#ccc]">
                 <img
-                  class="service-img w-[21vw] h-[21vw]"
+                  class="service-img fade-in-img w-[21vw] h-[21vw]"
                   src="./assets/service-0.png"
                   onload="handleImageLoaded(this)"
                   alt=""
@@ -343,7 +354,7 @@
               </div>
               <div class="w-[60vw] h-[50vw] bg-[#ccc]">
                 <img
-                  class="service-img w-[60vw] h-[50vw]"
+                  class="service-img fade-in-img w-[60vw] h-[50vw]"
                   src="./assets/service-1.png"
                   onload="handleImageLoaded(this)"
                   alt=""
@@ -353,7 +364,7 @@
             <div class="flex items-start">
               <div class="w-[56.7vw] h-[41.1vw] mr-[3.1vw] bg-[#ccc]">
                 <img
-                  class="service-img w-[56.7vw] h-[41.1vw]"
+                  class="service-img fade-in-img w-[56.7vw] h-[41.1vw]"
                   src="./assets/service-2.png"
                   onload="handleImageLoaded(this)"
                   alt=""
@@ -361,7 +372,7 @@
               </div>
               <div class="w-[40.1vw] h-[25.5vw] bg-[#ccc]">
                 <img
-                  class="service-img w-[40.1vw] h-[25.5vw]"
+                  class="service-img fade-in-img w-[40.1vw] h-[25.5vw]"
                   src="./assets/service-3.png"
                   onload="handleImageLoaded(this)"
                   alt=""
@@ -375,7 +386,7 @@
         <div class="flex items-end justify-end mb-[1.67vw]">
           <div class="w-[13.4vw] h-[13.4vw] mr-[1.67vw] bg-[#ccc]">
             <img
-              class="service-img w-[13.4vw] h-[13.4vw]"
+              class="service-img fade-in-img w-[13.4vw] h-[13.4vw]"
               src="./assets/service-0.png"
               onload="handleImageLoaded(this)"
               alt=""
@@ -383,7 +394,7 @@
           </div>
           <div class="w-[36.45vw] h-[31.25vw] bg-[#ccc]">
             <img
-              class="service-img w-[36.45vw] h-[31.25vw]"
+              class="service-img fade-in-img w-[36.45vw] h-[31.25vw]"
               src="./assets/service-1.png"
               onload="handleImageLoaded(this)"
               alt=""
@@ -393,7 +404,7 @@
         <div class="flex items-start">
           <div class="w-[34.27vw] h-[25.2vw] mr-[1.67vw] bg-[#ccc]">
             <img
-              class="service-img w-[34.27vw] h-[25.2vw]"
+              class="service-img fade-in-img w-[34.27vw] h-[25.2vw]"
               src="./assets/service-2.png"
               onload="handleImageLoaded(this)"
               alt=""
@@ -401,7 +412,7 @@
           </div>
           <div class="w-[23.95vw] h-[15.62vw] bg-[#ccc]">
             <img
-              class="service-img w-[23.95vw] h-[15.62vw]"
+              class="service-img fade-in-img w-[23.95vw] h-[15.62vw]"
               src="./assets/service-3.png"
               onload="handleImageLoaded(this)"
               alt=""
@@ -439,6 +450,7 @@
     <section class="team-section">
       <div class="team-section-header">
         <div
+          id="team_section_title"
           class="text-black text-3xl sm:text-5xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-normal text-center"
         >
           团队介绍
@@ -449,8 +461,15 @@
       </div>
 
       <div class="flex flex-col md:flex-row">
-        <div class="flex-1 relative">
-          <img class="w-full" src="./assets/team-1.png" alt="" />
+        <div
+          class="flex-1 relative bg-[#ccc] aspect-[32/45] fade-in-card-container"
+        >
+          <img
+            class="w-full fade-in-card"
+            src="./assets/team-1.png"
+            alt=""
+            onload="handleTeamImageLoaded(this)"
+          />
           <div class="absolute bottom-24 text-center w-full">
             <div
               class="text-white text-4xl sm:text-6xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-normal"
@@ -478,8 +497,15 @@
             </div>
           </div>
         </div>
-        <div class="flex-1 relative">
-          <img class="w-full" src="./assets/team-2.png" alt="" />
+        <div
+          class="flex-1 relative bg-[#bbb] aspect-[32/45] fade-in-card-container"
+        >
+          <img
+            class="w-full fade-in-card"
+            src="./assets/team-2.png"
+            alt=""
+            onload="handleTeamImageLoaded(this)"
+          />
           <div class="absolute bottom-24 text-center w-full">
             <div
               class="text-white text-4xl sm:text-6xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-normal"
@@ -507,8 +533,15 @@
             </div>
           </div>
         </div>
-        <div class="flex-1 relative">
-          <img class="w-full" src="./assets/team-3.png" alt="" />
+        <div
+          class="flex-1 relative bg-[#ccc] aspect-[32/45] fade-in-card-container"
+        >
+          <img
+            class="w-full fade-in-card"
+            src="./assets/team-3.png"
+            alt=""
+            onload="handleTeamImageLoaded(this)"
+          />
           <div class="absolute bottom-24 text-center w-full">
             <div
               class="text-white text-4xl sm:text-6xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-normal"
@@ -543,6 +576,7 @@
     <section class="news-section pb-8">
       <div class="news-section-header">
         <div
+          id="news_section_title"
           class="text-white text-3xl sm:text-5xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-normal text-center"
         >
           新闻动态

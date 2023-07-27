@@ -1,6 +1,30 @@
 var newsApi =
   "https://www.fastmock.site/mock/9c9cc0b93e4842bfe955a940d4bb0322/api/news";
 
+function handleNewsImageLoad(newsContainer) {
+  if (!newsContainer) {
+    return;
+  }
+  newsContainer.setAttribute("data-load", "true");
+  const isIntoView = newsContainer.getAttribute("data-into-view");
+  if (isIntoView === "true") {
+    newsContainer.classList.add("fade-in");
+  }
+}
+
+function handleNewsIntersection(entries) {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.setAttribute("data-into-view", "true");
+
+      const isLoad = entry.target.getAttribute("data-load") === "true";
+      if (isLoad) {
+        entry.target.classList.add("fade-in");
+      }
+    }
+  });
+}
+
 function fetchNews() {
   // 发送 API 请求，获取新闻数据
   var page = 1;
@@ -15,14 +39,23 @@ function fetchNews() {
       if (Array.isArray(data) && data.length > 0) {
         container.innerHTML = "";
         data.forEach((item) => {
-          const newsItem = document.createElement("div");
-          newsItem.className = "news-item flex-1 w-full px-2 lg:px-3 xl:px-4";
+          const newsItem = document.createElement("a");
+          newsItem.className =
+            "news-item block flex-1 w-full px-2 lg:px-3 xl:px-4";
+          newsItem.href = "/newsDetail?id=" + item.id;
+          newsItem.target = "_blank";
 
+          const newsImageContainer = document.createElement("div");
+          newsImageContainer.style.overflow = "hidden";
           const newImage = document.createElement("img");
           newImage.className = "news-image";
           newImage.src = item.image;
           newImage.alt = item.title;
-          newsItem.appendChild(newImage);
+          newImage.onload = function () {
+            handleNewsImageLoad(newsItem);
+          };
+          newsImageContainer.appendChild(newImage);
+          newsItem.appendChild(newsImageContainer);
 
           const newsTitle = document.createElement("div");
           newsTitle.className =
@@ -37,6 +70,10 @@ function fetchNews() {
           newsItem.appendChild(newsContent);
 
           container.appendChild(newsItem);
+
+          // 添加进入视窗监听
+          const observer = new IntersectionObserver(handleNewsIntersection);
+          observer.observe(newsItem);
         });
       }
     })

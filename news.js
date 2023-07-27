@@ -44,6 +44,30 @@ function showLoadAll() {
   loadedAllEle.classList.remove("hidden");
 }
 
+function handleNewsImageLoad(newsContainer) {
+  if (!newsContainer) {
+    return;
+  }
+  newsContainer.setAttribute("data-load", "true");
+  const isIntoView = newsContainer.getAttribute("data-into-view");
+  if (isIntoView === "true") {
+    newsContainer.classList.add("fade-in");
+  }
+}
+
+function handleNewsIntersection(entries) {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.setAttribute("data-into-view", "true");
+
+      const isLoad = entry.target.getAttribute("data-load") === "true";
+      if (isLoad) {
+        entry.target.classList.add("fade-in");
+      }
+    }
+  });
+}
+
 function fetchNews() {
   // 发送 API 请求，获取新闻数据
   const container = document.querySelector(".news-container");
@@ -64,11 +88,17 @@ function fetchNews() {
           newsItem.href = "/newsDetail?id=" + item.id;
           newsItem.target = "_blank";
 
+          const newsImageContainer = document.createElement("div");
+          newsImageContainer.style.overflow = "hidden";
           const newImage = document.createElement("img");
           newImage.className = "news-image";
           newImage.src = item.image;
           newImage.alt = item.title;
-          newsItem.appendChild(newImage);
+          newImage.onload = function () {
+            handleNewsImageLoad(newsItem);
+          };
+          newsImageContainer.appendChild(newImage);
+          newsItem.appendChild(newsImageContainer);
 
           const newsTitle = document.createElement("div");
           newsTitle.className =
@@ -83,6 +113,10 @@ function fetchNews() {
           newsItem.appendChild(newsContent);
 
           container.appendChild(newsItem);
+
+          // 添加进入视窗监听
+          const observer = new IntersectionObserver(handleNewsIntersection);
+          observer.observe(newsItem);
         });
       }
 

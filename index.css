@@ -75,12 +75,27 @@ header .banner-container p {
   background: linear-gradient(to bottom, #f6f6f6 75%, #fff 75%, #fff 100%);
 }
 .service-img {
-  opacity: 0;
   cursor: pointer;
   transition: all 0.3s linear;
 }
 .service-img:hover {
   transform: scale(1.05);
+}
+
+.fade-in-img,
+.fade-in-card-container {
+  opacity: 0;
+}
+
+.fade-in-card-container {
+  overflow: hidden;
+  cursor: pointer;
+}
+.fade-in-card {
+  transition: all 0.5s linear;
+}
+.fade-in-card-container:hover img {
+  transform: scale(1.1);
 }
 
 /* 企业文化 */
@@ -121,6 +136,16 @@ header .banner-container p {
 }
 .news-section {
   background: #252429;
+}
+
+.news-item {
+  opacity: 0;
+}
+.news-item img {
+  transition: all 0.5s linear;
+}
+.news-item img:hover {
+  transform: scale(1.1);
 }
 
 .with-2-col {

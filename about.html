@@ -16,25 +16,90 @@
   </head>
   <body class="flex flex-col min-h-[100vh]">
     <header class="relative">
-      <div class="px-[48px] py-8 flex items-center justify-between">
-        <div class="flex items-center">
-          <img src="./assets/logo.png" alt="" class="w-9 h-9" />
-          <h2 class="text-white text-xl font-semibold ml-4">企业站</h2>
-        </div>
+      <div
+        class="px-6 sm:px-12 py-6 sm:py-12 flex items-center justify-between"
+      >
+        <a href="/" class="flex items-center cursor-pointer">
+          <img
+            src="./assets/logo.png"
+            alt=""
+            class="w-6 sm:w-10 h-6 sm:h-10 md:w-9 md:h-9"
+          />
+          <h2
+            class="text-white text-xl sm:text-2xl md:text-xl font-semibold ml-4"
+          >
+            企业站
+          </h2>
+        </a>
 
-        <div class="flex items-center">
-          <a href="/" class="mr-20">
+        <!-- desktop menu -->
+        <div class="hidden md:flex items-center">
+          <a href="/" class="mx-10">
             <div class="text-white text-sm font-normal">首页</div>
             <div class="w-full h-0.5 mt-2"></div>
           </a>
-          <a href="/news" target="_blank" class="mr-20">
+          <a href="/news" target="_blank" class="mx-10">
             <div class="text-white text-sm font-normal">新闻列表页</div>
             <div class="w-full h-0.5 mt-2"></div>
           </a>
-          <a href="/about" target="_blank" class="mr-20">
+          <a href="/about" target="_blank" class="mx-10">
             <div class="text-white text-sm font-normal">关于我们</div>
             <div class="w-full h-0.5 bg-orange-600 mt-2"></div>
           </a>
+        </div>
+
+        <!-- mobile menu -->
+        <div class="block md:hidden" onclick="handleClickMenuButton()">
+          <img
+            class="w-6 sm:w-9 h-6 sm:h-9"
+            src="./assets/icon-menu.png"
+            alt=""
+          />
+        </div>
+        <div
+          id="drawer"
+          class="hidden fixed top-0 left-0 bottom-0 right-0 w-full h-full"
+        >
+          <div class="relative w-full h-full">
+            <div
+              class="drawer-mask w-full h-full"
+              onclick="handleClickMask()"
+            ></div>
+            <div
+              id="drawer-content"
+              class="absolute right-0 top-0 w-[65vw] h-full bg-[#252429]"
+            >
+              <div class="w-full h-full relative">
+                <div
+                  onclick="closeDrawer()"
+                  class="absolute cursor-pointer top-4 sm:top-8 right-4 sm:right-8 w-8 sm:w-12 h-8 sm:h-12 flex items-center justify-center"
+                >
+                  <img
+                    class="w-6 sm:w-9 h-6 sm:h-9"
+                    src="./assets/icon-close.png"
+                    alt=""
+                  />
+                </div>
+                <a href="/" class="px-6 block sm:px-8 cursor-pointer">
+                  <div class="py-10 sm:py-[100px] border-[#333] border-b-2">
+                    <div class="text-white text-lg sm:text-3xl">首页</div>
+                  </div>
+                </a>
+
+                <a href="/news" class="px-6 block sm:px-8 cursor-pointer">
+                  <div class="py-10 sm:py-[100px] border-[#333] border-b-2">
+                    <div class="text-white text-lg sm:text-3xl">新闻列表页</div>
+                  </div>
+                </a>
+
+                <a href="/about" class="px-6 block sm:px-8 cursor-pointer">
+                  <div class="py-10 sm:py-[100px]">
+                    <div class="text-white text-lg sm:text-3xl">关于我们</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </header>
@@ -118,6 +183,6 @@
       </div>
     </footer>
 
-    <!-- <script src="newsDetail.js"></script> -->
+    <script src="menu.js"></script>
   </body>
 </html>

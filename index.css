@@ -74,6 +74,9 @@ header .banner-container p {
 .service-section {
   background: linear-gradient(to bottom, #f6f6f6 75%, #fff 75%, #fff 100%);
 }
+.service-img {
+  opacity: 0;
+}
 
 /* 企业文化 */
 .culture-section {

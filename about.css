@@ -1,0 +1,13 @@
+/* 新闻列表 */
+.about-us-section-header {
+  background: url(./assets/about-us.png) no-repeat;
+  background-size: 30% auto;
+  background-position: 60% 50%;
+  padding-top: 8vw;
+}
+@media (max-width: 768px) {
+  .about-us-section-header {
+    background-size: 50% auto;
+    background-position: center center;
+  }
+}

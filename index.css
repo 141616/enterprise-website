@@ -168,3 +168,6 @@ header .banner-container p {
 .drawer-mask {
   background-color: rgba(0, 0, 0, 0.5);
 }
+#drawer {
+  z-index: 100;
+}

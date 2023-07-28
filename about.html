@@ -13,13 +13,14 @@
     <link rel="stylesheet" href="./animate.css" />
     <link rel="stylesheet" href="./about.css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./route.js"></script>
   </head>
   <body class="flex flex-col min-h-[100vh]">
     <header class="relative">
       <div
         class="px-6 sm:px-12 py-6 sm:py-12 flex items-center justify-between"
       >
-        <a href="/" class="flex items-center cursor-pointer">
+        <a data-path="home" href="/" class="flex items-center cursor-pointer">
           <img
             src="./assets/logo.png"
             alt=""
@@ -34,15 +35,15 @@
 
         <!-- desktop menu -->
         <div class="hidden md:flex items-center">
-          <a href="/" class="mx-10">
+          <a data-path="home" href="/" class="mx-10">
             <div class="text-white text-sm font-normal">首页</div>
             <div class="w-full h-0.5 mt-2"></div>
           </a>
-          <a href="/news" target="_blank" class="mx-10">
+          <a data-path="news" href="/news" target="_blank" class="mx-10">
             <div class="text-white text-sm font-normal">新闻列表页</div>
             <div class="w-full h-0.5 mt-2"></div>
           </a>
-          <a href="/about" target="_blank" class="mx-10">
+          <a data-path="about" href="/about" target="_blank" class="mx-10">
             <div class="text-white text-sm font-normal">关于我们</div>
             <div class="w-full h-0.5 bg-orange-600 mt-2"></div>
           </a>
@@ -80,19 +81,31 @@
                     alt=""
                   />
                 </div>
-                <a href="/" class="px-6 block sm:px-8 cursor-pointer">
+                <a
+                  data-path="home"
+                  href="/"
+                  class="px-6 block sm:px-8 cursor-pointer"
+                >
                   <div class="py-10 sm:py-[100px] border-[#333] border-b-2">
                     <div class="text-white text-lg sm:text-3xl">首页</div>
                   </div>
                 </a>
 
-                <a href="/news" class="px-6 block sm:px-8 cursor-pointer">
+                <a
+                  data-path="news"
+                  href="/news"
+                  class="px-6 block sm:px-8 cursor-pointer"
+                >
                   <div class="py-10 sm:py-[100px] border-[#333] border-b-2">
                     <div class="text-white text-lg sm:text-3xl">新闻列表页</div>
                   </div>
                 </a>
 
-                <a href="/about" class="px-6 block sm:px-8 cursor-pointer">
+                <a
+                  data-path="about"
+                  href="/about"
+                  class="px-6 block sm:px-8 cursor-pointer"
+                >
                   <div class="py-10 sm:py-[100px]">
                     <div class="text-white text-lg sm:text-3xl">关于我们</div>
                   </div>

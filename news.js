@@ -89,7 +89,7 @@ function renderNewsList(newsList) {
   newsList.forEach((item) => {
     const newsItem = document.createElement("a");
     newsItem.className = "news-item block flex-1 w-full px-2 lg:px-3 xl:px-4";
-    newsItem.href = "/newsDetail?id=" + item.id;
+    newsItem.href = getNewsDetailPath(item.id);
     newsItem.target = "_blank";
 
     // 图片：大图和预览图

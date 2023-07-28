@@ -111,7 +111,6 @@ function loadImage() {
   }
 
   var src = imgEle.getAttribute("data-src");
-  console.log(src);
   if (!src) {
     return;
   }

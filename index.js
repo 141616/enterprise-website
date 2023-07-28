@@ -42,7 +42,7 @@ function fetchNews() {
           const newsItem = document.createElement("a");
           newsItem.className =
             "news-item block flex-1 w-full px-2 lg:px-3 xl:px-4";
-          newsItem.href = "/newsDetail?id=" + item.id;
+          newsItem.href = getNewsDetailPath(item.id);
           newsItem.target = "_blank";
 
           const newsImageContainer = document.createElement("div");

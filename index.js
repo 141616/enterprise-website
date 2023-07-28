@@ -49,7 +49,7 @@ function fetchNews() {
           newsImageContainer.style.overflow = "hidden";
           const newImage = document.createElement("img");
           newImage.className = "news-image";
-          newImage.src = item.image;
+          newImage.src = item.img;
           newImage.alt = item.title;
           newImage.onload = function () {
             handleNewsImageLoad(newsItem);

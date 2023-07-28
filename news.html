@@ -150,16 +150,18 @@
           <!-- PAGINATION -->
           <div
             id="news-pagination-contianer"
-            class="hidden py-10 flex items-center justify-center"
+            class="hidden py-10 flex flex-col sm:flex-row items-center justify-center"
           >
-            <div class="border text-sm pl-4 py-1 pr-3 rounded">
+            <div
+              class="border mb-2 inline-block text-sm pl-4 py-1 pr-3 rounded"
+            >
               <select name="page-size" id="page-size-select" class="h-6">
                 <option value="8">8条/页</option>
                 <option value="16">16条/页</option>
                 <option value="32">32条/页</option>
               </select>
             </div>
-            <div id="news-pagination" class="flex items-center mx-4">
+            <div id="news-pagination" class="mb-2 flex items-center mx-4">
               <button
                 id="prev-btn"
                 class="flex items-center justify-center w-8 h-8"
@@ -182,7 +184,7 @@
                 />
               </button>
             </div>
-            <div class="flex items-center">
+            <div class="flex items-center justify-center mb-2">
               <div class="text-zinc-500 text-sm font-normal leading-normal">
                 前往
               </div>

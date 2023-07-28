@@ -92,24 +92,41 @@ function renderNewsList(newsList) {
     newsItem.href = "/newsDetail?id=" + item.id;
     newsItem.target = "_blank";
 
+    // 图片：大图和预览图
     const newsImageContainer = document.createElement("div");
     newsImageContainer.style.overflow = "hidden";
-    const newImage = document.createElement("img");
-    newImage.className = "news-image";
-    newImage.src = item.image;
-    newImage.alt = item.title;
-    newImage.onload = function () {
+    newsImageContainer.classList.add("relative");
+    // 预览图
+    const newsPreview = document.createElement("img");
+    newsPreview.className = "news-preview";
+    newsPreview.style.filter = "blur(10px)";
+    newsPreview.src = item.preview;
+    newsPreview.alt = item.title;
+    newsPreview.onload = function () {
       handleNewsImageLoad(newsItem);
     };
-    newsImageContainer.appendChild(newImage);
+    newsImageContainer.appendChild(newsPreview);
+    // 大图
+    const newsImage = document.createElement("img");
+    newsImage.className =
+      "news-image opacity-0 absolute top-0 left-0 w-full h-full";
+    newsImage.src = item.img;
+    newsImage.alt = item.title;
+    newsImage.onload = function () {
+      // handleNewsImageLoad(newsItem);
+      newsImage.classList.remove("opacity-0");
+    };
+    newsImageContainer.appendChild(newsImage);
     newsItem.appendChild(newsImageContainer);
 
+    // 标题
     const newsTitle = document.createElement("div");
     newsTitle.className =
       "news-title with-2-col text-black text-xl font-semibold mt-6 md:mt-9";
     newsTitle.textContent = item.title;
     newsItem.appendChild(newsTitle);
 
+    // 详情
     const newsContent = document.createElement("div");
     newsContent.className =
       "news-content with-4-col text-black text-sm font-normal mt-6";

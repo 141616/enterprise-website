@@ -28,6 +28,7 @@ function fetchNewsDetail() {
         newImage.className = "news-image";
         newImage.src = news.image;
         newImage.alt = news.title;
+        newImage.style.minHeight = "140px";
         container.appendChild(newImage);
 
         // 插入新闻标题

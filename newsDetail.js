@@ -34,6 +34,10 @@ function fetchNewsDetail() {
         newImage.style.height = `${height}px`;
         container.appendChild(newImage);
 
+        window.addEventListener("resize", function () {
+          newImage.style.width = `auto`;
+        });
+
         // 插入新闻标题
         const newsTitle = document.createElement("div");
         newsTitle.className =

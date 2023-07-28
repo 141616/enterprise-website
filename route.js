@@ -9,6 +9,14 @@ function getNewsDetailPath(newsId) {
   }
 }
 
+function getNewsPathByPageSize(page, pageSize) {
+  if (isGithub) {
+    return `/${projectName}/news?page=${page}&pageSize=${pageSize}`;
+  } else {
+    return `/news?page=${page}&pageSize=${pageSize}`;
+  }
+}
+
 function replacePathInGithubPages() {
   var aList = document.querySelectorAll("a");
   for (var i = 0; i < aList.length; i++) {

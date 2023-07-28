@@ -220,8 +220,8 @@ function goToPage(page) {
   if (page >= 1 && page <= totalPage) {
     currentPage = page;
     generatePageButtons();
-    window.location.href =
-      "/news?page=" + currentPage + "&pageSize=" + pageSize;
+    window.location.href = getNewsPathByPageSize(currentPage, pageSize);
+    // "/news?page=" + currentPage + "&pageSize=" + pageSize;
     // 在这里你可以添加更新数据的逻辑
   }
 }
@@ -245,7 +245,7 @@ function changePageSize() {
   const pageSizeSelect = document.getElementById("page-size-select");
   const newPageSize = parseInt(pageSizeSelect.value, 10);
   pageSize = newPageSize;
-  window.location.href = "/news?page=" + currentPage + "&pageSize=" + pageSize;
+  window.location.href = getNewsPathByPageSize(currentPage, pageSize);
   // 在这里你可以添加每页显示条数改变后的逻辑，比如重新加载数据等
 }
 

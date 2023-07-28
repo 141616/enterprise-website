@@ -91,6 +91,9 @@ function playNext() {
 }
 
 function play() {
+  // 图片懒加载
+  loadImage();
+
   if (timeout) {
     clearTimeout(timeout);
   }
@@ -98,6 +101,25 @@ function play() {
   timeout = setTimeout(function () {
     playProgress(activeIndex);
   }, 600);
+}
+
+function loadImage() {
+  var id = `banner-img-${activeIndex}`;
+  var imgEle = document.getElementById(id);
+  if (!imgEle) {
+    return;
+  }
+
+  var src = imgEle.getAttribute("data-src");
+  console.log(src);
+  if (!src) {
+    return;
+  }
+
+  imgEle.src = src;
+  imgEle.onload = function () {
+    imgEle.removeAttribute("data-src");
+  };
 }
 
 function handleBannerFade() {

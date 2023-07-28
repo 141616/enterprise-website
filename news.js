@@ -102,6 +102,8 @@ function renderNewsList(newsList) {
     newsPreview.style.filter = "blur(10px)";
     newsPreview.src = item.preview;
     newsPreview.alt = item.title;
+    newsPreview.width = 350;
+    newsPreview.height = 500;
     newsPreview.onload = function () {
       handleNewsImageLoad(newsItem);
     };
@@ -112,6 +114,8 @@ function renderNewsList(newsList) {
       "news-image opacity-0 absolute top-0 left-0 w-full h-full";
     newsImage.src = item.img;
     newsImage.alt = item.title;
+    newsImage.width = 350;
+    newsImage.height = 500;
     newsImage.onload = function () {
       // handleNewsImageLoad(newsItem);
       newsImage.classList.remove("opacity-0");

@@ -51,6 +51,8 @@ function fetchNews() {
           newImage.className = "news-image";
           newImage.src = item.img;
           newImage.alt = item.title;
+          newImage.width = 350;
+          newImage.height = 500;
           newImage.onload = function () {
             handleNewsImageLoad(newsItem);
           };

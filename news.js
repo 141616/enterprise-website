@@ -1,48 +1,10 @@
 var newsApi =
   "https://www.fastmock.site/mock/9c9cc0b93e4842bfe955a940d4bb0322/api/news";
-var page = 1;
-var pageSize = 8;
+
 var total = 0;
-var isObserve = false;
-
-function handleIntersection(entries) {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      // 已加载全部
-      if (isLoadedAll()) {
-        return;
-      }
-      // load next page
-      page += 1;
-      fetchNews(page + 1);
-    }
-  });
-}
-
-function addLoadMoreObserver() {
-  if (isObserve) {
-    return;
-  }
-  isObserve = true;
-  const element = document.getElementById("news-loading");
-  if (element) {
-    const observer = new IntersectionObserver(handleIntersection);
-    observer.observe(element);
-  }
-}
-
-function isLoadedAll() {
-  return page * pageSize >= total;
-}
-
-function showLoadAll() {
-  const loadingEle = document.getElementById("news-loading");
-  if (loadingEle) {
-    loadingEle.classList.add("hidden");
-  }
-  const loadedAllEle = document.getElementById("news-all-loaded");
-  loadedAllEle.classList.remove("hidden");
-}
+var totalPage = 0;
+var currentPage = 1;
+var pageSize = 8;
 
 function handleNewsImageLoad(newsContainer) {
   if (!newsContainer) {
@@ -68,60 +30,31 @@ function handleNewsIntersection(entries) {
   });
 }
 
+// 初始化分页数据
+function initPageInfoFromSearchParams() {
+  var search = new URLSearchParams(window.location.search);
+  currentPage = +(search.get("page") || 1);
+  pageSize = +(search.get("pageSize") || 8);
+
+  // update select selected option
+  const pageSizeSelect = document.getElementById("page-size-select");
+  pageSizeSelect.value = pageSize;
+}
+
+// 发送 API 请求，获取新闻数据
 function fetchNews() {
-  // 发送 API 请求，获取新闻数据
-  const container = document.querySelector(".news-container");
-  fetch(`${newsApi}?page=${page}&pageSize=${pageSize}`)
+  fetch(`${newsApi}?page=${currentPage}&pageSize=${pageSize}`)
     .then((response) => response.json())
     .then((res) => {
       // 遍历新闻数据，创建新闻列表项
       var data = res.data;
       total = (res && res.links && res.links.total) || 0;
+      totalPage = Math.ceil(total / pageSize);
       if (Array.isArray(data) && data.length > 0) {
-        // 第一次加载完成后添加加载更多的监听事件
-        !isObserve && addLoadMoreObserver();
-
-        data.forEach((item) => {
-          const newsItem = document.createElement("a");
-          newsItem.className =
-            "news-item block flex-1 w-full px-2 lg:px-3 xl:px-4";
-          newsItem.href = "/newsDetail?id=" + item.id;
-          newsItem.target = "_blank";
-
-          const newsImageContainer = document.createElement("div");
-          newsImageContainer.style.overflow = "hidden";
-          const newImage = document.createElement("img");
-          newImage.className = "news-image";
-          newImage.src = item.image;
-          newImage.alt = item.title;
-          newImage.onload = function () {
-            handleNewsImageLoad(newsItem);
-          };
-          newsImageContainer.appendChild(newImage);
-          newsItem.appendChild(newsImageContainer);
-
-          const newsTitle = document.createElement("div");
-          newsTitle.className =
-            "news-title with-2-col text-black text-xl font-semibold mt-6 md:mt-9";
-          newsTitle.textContent = item.title;
-          newsItem.appendChild(newsTitle);
-
-          const newsContent = document.createElement("div");
-          newsContent.className =
-            "news-content with-4-col text-black text-sm font-normal mt-6";
-          newsContent.textContent = item.desc;
-          newsItem.appendChild(newsContent);
-
-          container.appendChild(newsItem);
-
-          // 添加进入视窗监听
-          const observer = new IntersectionObserver(handleNewsIntersection);
-          observer.observe(newsItem);
-        });
-      }
-
-      if (isLoadedAll()) {
-        showLoadAll();
+        renderNewsList(data);
+        generatePageButtons();
+      } else {
+        renderEmptyData();
       }
     })
     .catch((error) => {
@@ -129,4 +62,180 @@ function fetchNews() {
     });
 }
 
+function hideLoading() {
+  const loadingEle = document.getElementById("news-loading");
+  if (loadingEle) {
+    loadingEle.classList.add("hidden");
+  }
+}
+
+function renderEmptyData() {
+  hideLoading();
+  const container = document.querySelector(".news-container");
+  if (container) {
+    container.innerHTML = `
+      <div class="col-span-2 md:col-span-4 flex flex-col items-center justify-center">
+        <h1 class="text-base text-gray-900">
+          找不到数据
+        </h1>
+      </div>
+    `;
+  }
+}
+function renderNewsList(newsList) {
+  hideLoading();
+
+  const container = document.querySelector(".news-container");
+  newsList.forEach((item) => {
+    const newsItem = document.createElement("a");
+    newsItem.className = "news-item block flex-1 w-full px-2 lg:px-3 xl:px-4";
+    newsItem.href = "/newsDetail?id=" + item.id;
+    newsItem.target = "_blank";
+
+    const newsImageContainer = document.createElement("div");
+    newsImageContainer.style.overflow = "hidden";
+    const newImage = document.createElement("img");
+    newImage.className = "news-image";
+    newImage.src = item.image;
+    newImage.alt = item.title;
+    newImage.onload = function () {
+      handleNewsImageLoad(newsItem);
+    };
+    newsImageContainer.appendChild(newImage);
+    newsItem.appendChild(newsImageContainer);
+
+    const newsTitle = document.createElement("div");
+    newsTitle.className =
+      "news-title with-2-col text-black text-xl font-semibold mt-6 md:mt-9";
+    newsTitle.textContent = item.title;
+    newsItem.appendChild(newsTitle);
+
+    const newsContent = document.createElement("div");
+    newsContent.className =
+      "news-content with-4-col text-black text-sm font-normal mt-6";
+    newsContent.textContent = item.desc;
+    newsItem.appendChild(newsContent);
+
+    container.appendChild(newsItem);
+
+    // 添加进入视窗监听
+    const observer = new IntersectionObserver(handleNewsIntersection);
+    observer.observe(newsItem);
+  });
+}
+initPageInfoFromSearchParams();
 fetchNews();
+
+function generatePageButtons() {
+  const paginationContainer = document.getElementById(
+    "news-pagination-contianer"
+  );
+  if (paginationContainer) {
+    paginationContainer.classList.remove("hidden");
+  }
+
+  const pageButtons = document.getElementById("page-buttons");
+  pageButtons.innerHTML = "";
+
+  const visiblePages = Math.min(totalPage, 5);
+
+  let startPage = currentPage - Math.floor(visiblePages / 2);
+  let endPage = startPage + visiblePages - 1;
+
+  if (startPage < 1) {
+    startPage = 1;
+    endPage = Math.min(startPage + visiblePages - 1, totalPage);
+  }
+
+  if (endPage > totalPage) {
+    endPage = totalPage;
+    startPage = Math.max(endPage - visiblePages + 1, 1);
+  }
+
+  if (startPage > 1) {
+    const firstPageBtn = document.createElement("li");
+    firstPageBtn.textContent = "1";
+    firstPageBtn.addEventListener("click", () => goToPage(1));
+    firstPageBtn.classList.add("pagination-button");
+    pageButtons.appendChild(firstPageBtn);
+
+    if (startPage > 2) {
+      const ellipsisStart = document.createElement("li");
+      ellipsisStart.textContent = "...";
+      ellipsisStart.addEventListener("click", () => goToPage(startPage - 1));
+      ellipsisStart.classList.add("pagination-button");
+      ellipsisStart.classList.add("pb-2");
+      pageButtons.appendChild(ellipsisStart);
+    }
+  }
+
+  for (let i = startPage; i <= endPage; i++) {
+    const button = document.createElement("li");
+    button.textContent = i;
+    if (i === currentPage) {
+      button.classList.add("pagination-button-active");
+    } else {
+      button.addEventListener("click", () => goToPage(i));
+    }
+    button.classList.add("pagination-button");
+    pageButtons.appendChild(button);
+  }
+
+  if (endPage < totalPage) {
+    if (endPage < totalPage - 1) {
+      const ellipsisEnd = document.createElement("li");
+      ellipsisEnd.textContent = "...";
+      ellipsisEnd.addEventListener("click", () => goToPage(endPage + 1));
+      ellipsisEnd.classList.add("pagination-button");
+      ellipsisEnd.classList.add("pb-2");
+      pageButtons.appendChild(ellipsisEnd);
+    }
+
+    const lastPageBtn = document.createElement("li");
+    lastPageBtn.textContent = totalPage;
+    lastPageBtn.addEventListener("click", () => goToPage(totalPage));
+    lastPageBtn.classList.add("pagination-button");
+    pageButtons.appendChild(lastPageBtn);
+  }
+}
+
+function goToPage(page) {
+  if (page >= 1 && page <= totalPage) {
+    currentPage = page;
+    generatePageButtons();
+    window.location.href =
+      "/news?page=" + currentPage + "&pageSize=" + pageSize;
+    // 在这里你可以添加更新数据的逻辑
+  }
+}
+
+function prevPage() {
+  goToPage(currentPage - 1);
+}
+
+function nextPage() {
+  goToPage(currentPage + 1);
+}
+
+function jumpToPage() {
+  const input = document.getElementById("jump-input");
+  const page = parseInt(input.value, 10);
+  input.value = "";
+  goToPage(page);
+}
+
+function changePageSize() {
+  const pageSizeSelect = document.getElementById("page-size-select");
+  const newPageSize = parseInt(pageSizeSelect.value, 10);
+  pageSize = newPageSize;
+  window.location.href = "/news?page=" + currentPage + "&pageSize=" + pageSize;
+  // 在这里你可以添加每页显示条数改变后的逻辑，比如重新加载数据等
+}
+
+// 绑定事件
+document.getElementById("prev-btn").addEventListener("click", prevPage);
+document.getElementById("next-btn").addEventListener("click", nextPage);
+document.getElementById("jump-btn").addEventListener("click", jumpToPage);
+document
+  .getElementById("page-size-select")
+  .addEventListener("change", changePageSize);

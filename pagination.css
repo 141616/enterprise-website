@@ -1,0 +1,24 @@
+select:focus-visible {
+  outline: none !important;
+}
+
+.pagination-button {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 400;
+  color: #8b8b8b;
+  cursor: pointer;
+}
+
+.pagination-button-active {
+  color: #ff350d;
+  font-weight: 700;
+}
+
+/* #jump-input {
+  border
+} */

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="./index.css" />
     <link rel="stylesheet" href="./news.css" />
     <link rel="stylesheet" href="./animate.css" />
+    <link rel="stylesheet" href="./pagination.css" />
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="flex flex-col min-h-[100vh]">
@@ -116,10 +117,14 @@
             class="w-32 h-1.5 mt-[4.1vw] lg:mt-8 mb-[7vw] lg:mb-14 rounded bg-orange-600 mx-auto"
           ></div>
         </div>
+
         <div class="w-full md:w-[82vw] mx-auto px-4">
+          <!-- NEW LIST -->
           <div
             class="news-container grid gap-y-10 grid-cols-2 md:grid-cols-4"
           ></div>
+
+          <!-- LOADING -->
           <div
             id="news-loading"
             class="pt-8 col-span-2 md:col-span-4 w-full flex justify-center"
@@ -141,13 +146,89 @@
               </svg>
             </span>
           </div>
-          <!-- loaded all data -->
+
+          <!-- PAGINATION -->
           <div
+            id="news-pagination-contianer"
+            class="hidden py-10 flex items-center justify-center"
+          >
+            <div class="border text-sm pl-4 py-1 pr-3 rounded">
+              <select name="page-size" id="page-size-select" class="h-6">
+                <option value="8">8条/页</option>
+                <option value="16">16条/页</option>
+                <option value="32">32条/页</option>
+              </select>
+            </div>
+            <div id="news-pagination" class="flex items-center mx-4">
+              <button
+                id="prev-btn"
+                class="flex items-center justify-center w-8 h-8"
+              >
+                <img
+                  class="w-[14px] h-[14px]"
+                  src="./assets/arrow-left.png"
+                  alt=""
+                />
+              </button>
+              <ul id="page-buttons" class="flex items-center"></ul>
+              <button
+                id="next-btn"
+                class="flex items-center justify-center w-8 h-8"
+              >
+                <img
+                  class="w-[14px] h-[14px] rotate-180"
+                  src="./assets/arrow-left.png"
+                  alt=""
+                />
+              </button>
+            </div>
+            <div class="flex items-center">
+              <div class="text-zinc-500 text-sm font-normal leading-normal">
+                前往
+              </div>
+              <input
+                class="border w-14 h-8 rounded mx-2 text-center"
+                type="number"
+                id="jump-input"
+                min="1"
+              />
+              <div class="text-zinc-500 text-sm font-normal leading-normal">
+                页
+              </div>
+              <button
+                class="ml-2 rounded h-8 px-4 bg-[#ff350d] text-white text-sm"
+                id="jump-btn"
+              >
+                跳转
+              </button>
+            </div>
+          </div>
+          <!-- <div class="pagination">
+            <div class="pagination-left">
+              <select id="perPageSelect">
+                <option value="5">5 条/页</option>
+                <option value="10">10 条/页</option>
+                <option value="20">20 条/页</option>
+              </select>
+            </div>
+            <div class="pagination-center">
+              <button id="prevBtn">上一页</button>
+              <ul id="pageButtons"></ul>
+              <button id="nextBtn">下一页</button>
+            </div>
+            <div class="pagination-right">
+              <input type="number" id="jumpInput" min="1" />
+              <button id="jumpBtn">跳转</button>
+            </div>
+          </div> -->
+
+          <!-- loaded all data -->
+          <!-- <div
             id="news-all-loaded"
             class="hidden pt-8 text-center text-slate-500 text-sm"
           >
             没有更多了~
-          </div>
+          </div> -->
         </div>
       </section>
     </div>

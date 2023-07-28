@@ -28,15 +28,9 @@ function fetchNewsDetail() {
         newImage.className = "news-image";
         newImage.src = news.image;
         newImage.alt = news.title;
-        var width = container.clientWidth;
-        var height = (width * 660) / 1560;
-        newImage.style.width = `${width}px`;
-        newImage.style.height = `${height}px`;
+        newImage.width = 1560;
+        newImage.height = 660;
         container.appendChild(newImage);
-
-        window.addEventListener("resize", function () {
-          newImage.style.height = `auto`;
-        });
 
         // 插入新闻标题
         const newsTitle = document.createElement("div");

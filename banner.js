@@ -111,13 +111,16 @@ function loadImage() {
   }
 
   var src = imgEle.getAttribute("data-src");
-  if (!src) {
+  var srcset = imgEle.getAttribute("data-srcset");
+  if (!src || !srcset) {
     return;
   }
 
   imgEle.src = src;
+  imgEle.srcset = srcset;
   imgEle.onload = function () {
     imgEle.removeAttribute("data-src");
+    imgEle.removeAttribute("data-srcset");
   };
 }
 

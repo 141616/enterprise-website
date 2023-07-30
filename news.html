@@ -50,7 +50,7 @@
         </div>
 
         <!-- mobile menu -->
-        <div class="block md:hidden" onclick="handleClickMenuButton()">
+        <div id="mobile_menu" class="block md:hidden">
           <img
             class="w-6 sm:w-9 h-6 sm:h-9"
             src="./assets/icon-menu.png"
@@ -62,17 +62,14 @@
           class="hidden fixed top-0 left-0 bottom-0 right-0 w-full h-full"
         >
           <div class="relative w-full h-full">
-            <div
-              class="drawer-mask w-full h-full"
-              onclick="handleClickMask()"
-            ></div>
+            <div class="drawer-mask w-full h-full" id="drawer_mask"></div>
             <div
               id="drawer-content"
               class="absolute right-0 top-0 w-[65vw] h-full bg-[#252429]"
             >
               <div class="w-full h-full relative">
                 <div
-                  onclick="closeDrawer()"
+                  id="drawer_close"
                   class="absolute cursor-pointer top-4 sm:top-8 right-4 sm:right-8 w-8 sm:w-12 h-8 sm:h-12 flex items-center justify-center"
                 >
                   <img

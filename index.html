@@ -74,7 +74,7 @@
           </div>
 
           <!-- mobile menu -->
-          <div class="block md:hidden" onclick="handleClickMenuButton()">
+          <div id="mobile_menu" class="block md:hidden">
             <img
               class="w-6 sm:w-9 h-6 sm:h-9"
               src="./assets/icon-menu.png"
@@ -86,17 +86,14 @@
             class="hidden fixed top-0 left-0 bottom-0 right-0 w-full h-full"
           >
             <div class="relative w-full h-full">
-              <div
-                class="drawer-mask w-full h-full"
-                onclick="handleClickMask()"
-              ></div>
+              <div id="drawer_mask" class="drawer-mask w-full h-full"></div>
               <div
                 id="drawer-content"
                 class="absolute right-0 top-0 w-[65vw] h-full bg-[#252429]"
               >
                 <div class="w-full h-full relative">
                   <div
-                    onclick="closeDrawer()"
+                    id="drawer_close"
                     class="absolute cursor-pointer top-4 sm:top-8 right-4 sm:right-8 w-8 sm:w-12 h-8 sm:h-12 flex items-center justify-center"
                   >
                     <img
@@ -152,10 +149,12 @@
           >
             <div class="relative h-full">
               <img
-                srcset="./assets/banner/banner-1-960w.webp 960w,
-                        ./assets/banner/banner-1-1440w.webp 1440w,
-                        ./assets/banner/banner-1-1920w.webp 1920w,
-                        ./assets/banner/banner-1-3840w.webp 3840w"
+                srcset="
+                  ./assets/banner/banner-1-960w.webp   960w,
+                  ./assets/banner/banner-1-1440w.webp 1440w,
+                  ./assets/banner/banner-1-1920w.webp 1920w,
+                  ./assets/banner/banner-1-3840w.webp 3840w
+                "
                 src="./assets/banner/banner-1-960w.webp"
                 alt=""
               />
@@ -209,7 +208,6 @@
             class="banner-item absolute top-0 left-0 w-full h-full opacity-0"
           >
             <div class="relative h-full">
-              
               <img
                 id="banner-img-2"
                 data-srcset="./assets/banner/banner-3-960w.webp 960w,
@@ -244,7 +242,7 @@
               class="w-4 h-4 flex items-center justify-center my-1 cursor-pointer"
             >
               <span
-                onclick="handleClickDot(this, 0)"
+                id="dot-0"
                 class="progress progress-active w-3 h-3 block relative"
               >
                 <svg class="block" viewBox="22 22 44 44">
@@ -277,10 +275,7 @@
             <div
               class="w-4 h-4 flex items-center justify-center my-1 cursor-pointer"
             >
-              <span
-                onclick="handleClickDot(this, 1)"
-                class="progress w-3 h-3 block relative"
-              >
+              <span id="dot-1" class="progress w-3 h-3 block relative">
                 <svg class="block" viewBox="22 22 44 44">
                   <circle
                     class="progress-circle"
@@ -311,10 +306,7 @@
             <div
               class="w-4 h-4 flex items-center justify-center my-1 cursor-pointer"
             >
-              <span
-                onclick="handleClickDot(this, 2)"
-                class="progress w-3 h-3 block relative"
-              >
+              <span id="dot-2" class="progress w-3 h-3 block relative">
                 <svg class="block" viewBox="22 22 44 44">
                   <circle
                     class="progress-circle"

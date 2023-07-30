@@ -160,3 +160,16 @@ function bannerFadeIn(ele) {
 }
 
 playProgress(activeIndex);
+
+document.getElementById("dot-0").addEventListener("click", function (e) {
+  console.log("dot-0");
+  handleClickDot(e.currentTarget, 0);
+});
+document.getElementById("dot-1").addEventListener("click", function (e) {
+  console.log("dot-1");
+  handleClickDot(e.currentTarget, 1);
+});
+document.getElementById("dot-2").addEventListener("click", function (e) {
+  console.log("dot-2");
+  handleClickDot(e.currentTarget, 2);
+});

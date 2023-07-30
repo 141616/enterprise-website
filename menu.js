@@ -32,3 +32,11 @@ function closeDrawer() {
   const drawerContentEle = document.getElementById("drawer-content");
   drawerContentEle.classList.remove("slide-in-right-3");
 }
+
+document
+  .getElementById("mobile_menu")
+  .addEventListener("click", handleClickMenuButton);
+document
+  .getElementById("drawer_mask")
+  .addEventListener("click", handleClickMask);
+document.getElementById("drawer_close").addEventListener("click", closeDrawer);
